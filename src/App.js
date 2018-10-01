@@ -11,6 +11,15 @@ class App extends Component {
     }
   }
 
+  componentDidMount = () => {
+    if (localStorage.length !== 0) {
+      this.setState({
+        ideas: JSON.parse(localStorage.getItem('ideas'))
+      })
+    }
+  }
+  
+
   addIdea = idea => {
     const newIdea = {...idea, id: Date.now()};
     const ideas = [...this.state.ideas, newIdea];
