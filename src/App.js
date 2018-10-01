@@ -12,19 +12,22 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    if (localStorage.length !== 0) {
-      this.setState({
-        ideas: JSON.parse(localStorage.getItem('ideas'))
-      })
-    }
+    this.checkLocalStorage();
   }
   
-
   addIdea = idea => {
     const newIdea = {...idea, id: Date.now()};
     const ideas = [...this.state.ideas, newIdea];
     this.updateStorage(ideas);
     this.setState({ ideas });
+  }
+
+  checkLocalStorage = () => {
+    if (localStorage.length !== 0) {
+      this.setState({
+        ideas: JSON.parse(localStorage.getItem('ideas'))
+      })
+    }
   }
 
   removeIdea = id => {
