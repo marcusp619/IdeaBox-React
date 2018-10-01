@@ -14,12 +14,18 @@ class App extends Component {
   addIdea = idea => {
     const newIdea = {...idea, id: Date.now()};
     const ideas = [...this.state.ideas, newIdea];
+    this.updateStorage(ideas);
     this.setState({ ideas });
   }
 
   removeIdea = id => {
     const ideas = this.state.ideas.filter(idea => idea.id !== id)
+    this.updateStorage(ideas)
     this.setState({ ideas })
+  }
+
+  updateStorage = ideas => {
+    localStorage.setItem('ideas', JSON.stringify(ideas))
   }
 
   render() {
